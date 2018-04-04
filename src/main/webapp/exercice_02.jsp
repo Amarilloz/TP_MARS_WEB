@@ -3,18 +3,29 @@
     Created on : 28 mars 2018, 14:42:49
     Author     : Formation
 --%>
-<%@page import="java.util.Scanner"%>
-<%@ page language="java" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>II/ Moyenne</h1>
+
+<%@include file="head.jsp" %>
+    <h1>II/ Moyenne</h1>
+    <form action="Exercice_02_Servlet" method="POST">
+        <label>Saisir un entier : </label>
+        <input type="text" name="nbSaisie" />
+        <input type="submit" value="Valider" />
+    </form>
+    <%
+        int entier = 0;
+        if (session.getAttribute("nbSaisie") != null) {
+            entier = (int) session.getAttribute("nbSaisie");
+        }
+    %>
+    <form action="Exercice_02_Servlet_02" method="POST">
         <%
+            for (int i = 0; i < entier; i++) {
         %>
-    </body>
-</html>
+        <label>Saisir un nombre : </label>
+        <input type="text" name="Val<%=i%>"/><br/>
+        <%
+            }
+        %>
+        <input type="submit" value="Valider" />
+    </form>
+<%@include file="foot.jsp" %>
