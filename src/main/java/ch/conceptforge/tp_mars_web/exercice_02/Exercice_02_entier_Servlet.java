@@ -5,21 +5,22 @@
  */
 package ch.conceptforge.tp_mars_web.exercice_02;
 
+import ch.conceptforge.tp_mars_web.NewHibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 
 /**
  *
  * @author Formation
  */
-public class Exercice_02_Servlet_02 extends HttpServlet {
+public class Exercice_02_entier_Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,26 +36,15 @@ public class Exercice_02_Servlet_02 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            List<Integer> Listvalue = new ArrayList<Integer>();
+
             HttpSession sessionweb = request.getSession(true);
             int entier = 0;
-            if (sessionweb.getAttribute("nbSaisie") != null) {
-                entier = (int) sessionweb.getAttribute("nbSaisie");
-                for (int i = 0; i < entier; i++) {
-                    if (request.getParameter("Val" + i) != null) {
-                        Listvalue.add(new Integer("Val" + i));
-                    }
-                }
+            if (request.getParameter("nbSaisie") != null) { // input name = "nbEntier"
+                entier = (int) Integer.parseInt(request.getParameter("nbSaisie"));
             }
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Exercice_02_Servlet_02</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Exercice_02_Servlet_02 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            sessionweb.setAttribute("nbSaisie", entier);
+            RequestDispatcher rd = request.getRequestDispatcher("exercice_02/exercice_02_reel.jsp");
+            rd.forward(request, response);
         }
     }
 
