@@ -151,6 +151,7 @@ public class Exercice_03_Servlet extends HttpServlet {
             out.println("<title>Servlet Exercice_03</title>");
             out.println("</head>");
             out.println("<body>");
+            out.println("<br/><a href='exercice_03.jsp'><< Retour Sapins</a>");
             out.println("<br/><a href='index.jsp'><< Retour index</a>");
             out.println("</body>");
             out.println("</html>");

@@ -9,16 +9,20 @@
         <servlet-class>ch.conceptforge.tp_mars_web.exercice_02.Exercice_02_entier_Servlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Exercice_02_reel_Servlet</servlet-name>
+        <servlet-class>ch.conceptforge.tp_mars_web.exercice_02.Exercice_02_reel_Servlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Exercice_03_Servlet</servlet-name>
         <servlet-class>ch.conceptforge.tp_mars_web.exercice_03.Exercice_03_Servlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Exercice_04_Servlet</servlet-name>
-        <servlet-class>ch.conceptforge.tp_mars_web.exercice_04.Exercice_04_Servlet</servlet-class>
+        <servlet-name>Exercice_04_Randomize_Servlet</servlet-name>
+        <servlet-class>ch.conceptforge.tp_mars_web.exercice_04.Exercice_04_Randomize_Servlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Exercice_02_reel_Servlet</servlet-name>
-        <servlet-class>ch.conceptforge.tp_mars_web.exercice_02.Exercice_02_reel_Servlet</servlet-class>
+        <servlet-name>Exercice_04_Servlet</servlet-name>
+        <servlet-class>ch.conceptforge.tp_mars_web.exercice_04.Exercice_04_Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Exercice_01_Servlet</servlet-name>
@@ -29,6 +33,10 @@
         <url-pattern>/Exercice_02_entier_Servlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Exercice_02_reel_Servlet</servlet-name>
+        <url-pattern>/Exercice_02_reel_Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Exercice_03_Servlet</servlet-name>
         <url-pattern>/Exercice_03_Servlet</url-pattern>
     </servlet-mapping>
@@ -37,8 +45,8 @@
         <url-pattern>/Exercice_04_Servlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Exercice_02_reel_Servlet</servlet-name>
-        <url-pattern>/Exercice_02_reel_Servlet</url-pattern>
+        <servlet-name>Exercice_04_Randomize_Servlet</servlet-name>
+        <url-pattern>/Exercice_04_Randomize_Servlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

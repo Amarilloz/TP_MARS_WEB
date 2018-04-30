@@ -4,7 +4,7 @@
     Author     : Formation
 --%>
 
-<%@ page language="java" %>
+<%@page language="java" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="ch.conceptforge.tp_mars_web.*" %>
 <!DOCTYPE html>
