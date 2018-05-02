@@ -7,6 +7,8 @@ package ch.conceptforge.tp_mars_web.exercice_04;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +24,9 @@ import javax.servlet.http.HttpSession;
 public class Exercice_04_Randomize_Servlet extends HttpServlet {
 
     static final Random random = new Random();
+    static List<Integer> listRandom = new ArrayList<>();
+    static List<Integer> listCoups = new ArrayList<>();
+    static List<Integer> listScore = new ArrayList<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,14 +42,69 @@ public class Exercice_04_Randomize_Servlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession(true);
+
+            if (request.getParameter("nouvellePartie") != null) {
+                listRandom.clear();
+                listCoups.clear();
+            }
+            if (request.getParameter("clearScore") != null) {
+                listRandom.clear();
+                listScore.clear();
+            }
+
             int x = 0;
             while (x == 0) {
                 x = random.nextInt(100);
             }
-            session.setAttribute("nbRandom", x);
+            listRandom.add(x);
+            int r = 0;
+            r = listRandom.get(0);
+
+            int n = 0;
+            if (request.getParameter("nbSaisi") != null) {
+                n = Integer.parseInt(request.getParameter("nbSaisi"));
+            }
+
+            String inf = "";
+            String sup = "";
+            String egal = "";
+            int compteur = 0;
+            int meilleurScore = 0;
+            listCoups.add(compteur);
+            if (n > 0 && n <= 100) {
+                compteur += listCoups.get(0);
+                compteur++;
+                listCoups.clear();
+                listCoups.add(compteur);
+                if (n > r) {
+                    inf = "Le nombre à trouver est plus petit.";
+                }
+                if (n < r) {
+                    sup = "Le nombre à trouver est plus grand.";
+                }
+                if (n == r) {
+                    egal = "Vous avez trouvé le nombre !";
+                    listScore.add(compteur);
+                    int valtemp = listScore.get(0);
+                    for (Integer id : listScore) {
+                        if (valtemp > id) {
+                            valtemp = id;
+                        }
+                    }
+                    meilleurScore = valtemp;
+                }
+            }
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("nbRandom", r);
+            session.setAttribute("nbInf", inf);
+            session.setAttribute("nbSup", sup);
+            session.setAttribute("nbEgal", egal);
+            session.setAttribute("nbCoups", compteur);
+            session.setAttribute("meilleurScore", meilleurScore);
             RequestDispatcher rd = request.getRequestDispatcher("exercice_04.jsp");
             rd.forward(request, response);
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
