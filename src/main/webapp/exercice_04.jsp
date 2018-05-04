@@ -6,23 +6,25 @@
 
 <%@include file="head.jsp" %>
 <h1>IV/ Deviner un nombre</h1>
+<form action="Exercice_04_Randomize_Servlet" method="POST">
+    <input type="submit" name="nouvellePartie" value="Nouvelle Partie" />
+</form>
 <%
     int random = 0;
     if (session.getAttribute("nbRandom") != null) {
         random = (int) session.getAttribute("nbRandom");
     }
-    out.print(random);
-%>
-<form action="" method="POST">
-    <input type="submit" name="nouvellePartie" value="Nouvelle Partie" />
-</form>
-<%
+    //out.print(random);
+
     String inf = "";
     if (session.getAttribute("nbInf") != null) {
         inf = (String) session.getAttribute("nbInf");
     }
     if (inf != "") {
-        out.println("<br/>" + inf);
+%>
+<br/>
+<%
+        out.println(inf);
     }
 
     String sup = "";
@@ -30,7 +32,10 @@
         sup = (String) session.getAttribute("nbSup");
     }
     if (sup != "") {
-        out.println("<br/>" + sup);
+%>
+<br/>
+<%
+        out.println(sup);
     }
 
     String egal = "";
@@ -38,39 +43,53 @@
         egal = (String) session.getAttribute("nbEgal");
     }
     if (egal != "") {
-        out.println("<br/>" + egal);
+%>
+<br/><br/>
+<%
+        out.println(egal);
     }
 
     if (inf == "" && sup == "" && egal == "") {
-        out.println("<br/><br/>");
+%>
+<br/><br/>
+<%
     }
 %>
 <%
     if (egal == "") {
 %>
-<form action="" method="POST">
+<form action="Exercice_04_Randomize_Servlet" method="POST">
     <label>Saisir un nombre entre 1 et 100 : </label>
     <input type="text" name="nbSaisi" required />
     <input type="submit" value="Valider" />
 </form>
 <%
     } else {
-        out.println("<br/><br/>");
+%>
+<br/>
+<%
     }
 
     int coups = 0;
     if (session.getAttribute("nbCoups") != null) {
         coups = (int) session.getAttribute("nbCoups");
     }
-    out.println("<br/>Nombre d' essai(s) : " + coups);
+%>
+<br/>
+<%
+    out.println("Nombre d' essai(s) : " + coups);
+
     int meilleurScore = 0;
     if (session.getAttribute("meilleurScore") != null) {
         meilleurScore = (int) session.getAttribute("meilleurScore");
     }
-    out.println("<br/>Meilleur Score : " + meilleurScore);
 %>
-<form action="" method="POST">
-    <input type="submit" name="clearScore" value="Réinitialiser le score" />
+<br/>
+<%
+    out.println("Meilleur Score : " + meilleurScore);
+%>
+<form action="Exercice_04_Randomize_Servlet" method="POST">
+    <input type="submit" name="clear" value="Réinitialiser" />
 </form>
 <br/>
 <%@include file="foot.jsp" %>

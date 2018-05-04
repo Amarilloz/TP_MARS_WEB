@@ -5,18 +5,24 @@
  */
 package ch.conceptforge.tp_mars_web.exercice_04;
 
+import static ch.conceptforge.tp_mars_web.exercice_04.Exercice_04_Randomize_Servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Formation
  */
 public class Exercice_04_Servlet extends HttpServlet {
+
+    static final Random random = new Random();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +38,34 @@ public class Exercice_04_Servlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+
+            listRandom.clear();
+            listCoups.clear();
+
+            int x = 0;
+            while (x == 0) {
+                x = random.nextInt(100);
+            }
+            listRandom.add(x);
+
+            String inf = "";
+            String sup = "";
+            String egal = "";
+            int compteur = 0;
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("nbRandom", x);
+            session.setAttribute("nbInf", inf);
+            session.setAttribute("nbSup", sup);
+            session.setAttribute("nbEgal", egal);
+            session.setAttribute("nbCoups", compteur);
+            RequestDispatcher rd = request.getRequestDispatcher("exercice_04.jsp");
+            rd.forward(request, response);
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Exercice_04_Servlet</title>");            
+            out.println("<title>Servlet Exercice_04_Servlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Exercice_04_Servlet at " + request.getContextPath() + "</h1>");

@@ -47,40 +47,53 @@ public class Exercice_04_Randomize_Servlet extends HttpServlet {
                 listRandom.clear();
                 listCoups.clear();
             }
-            if (request.getParameter("clearScore") != null) {
+            if (request.getParameter("clear") != null) {
                 listRandom.clear();
+                listCoups.clear();
                 listScore.clear();
             }
 
-            int x = 0;
-            while (x == 0) {
-                x = random.nextInt(100);
+            if (listRandom.isEmpty()) {
+                int x = 0;
+                while (x == 0) {
+                    x = random.nextInt(100);
+                }
+                listRandom.add(x);
             }
-            listRandom.add(x);
-            int r = 0;
-            r = listRandom.get(0);
 
             int n = 0;
+            String string = "";
             if (request.getParameter("nbSaisi") != null) {
-                n = Integer.parseInt(request.getParameter("nbSaisi"));
+                string = request.getParameter("nbSaisi");
+                if (string.matches("0*[0-9]{1,3}")) {
+                    //"0*" : nombre quelquonque de 0
+                    //"[0-9]{1,3}" : entre 1 et 3 chiffres
+                    n = Integer.parseInt(string);
+                }
             }
 
             String inf = "";
             String sup = "";
             String egal = "";
+
+            int r = 0;
+            r = listRandom.get(0);
+            
             int compteur = 0;
-            int meilleurScore = 0;
             listCoups.add(compteur);
+            
+            int meilleurScore = 0;
+            
             if (n > 0 && n <= 100) {
                 compteur += listCoups.get(0);
                 compteur++;
                 listCoups.clear();
                 listCoups.add(compteur);
                 if (n > r) {
-                    inf = "Le nombre à trouver est plus petit.";
+                    inf = "Le nombre à trouver est plus petit que " + n;
                 }
                 if (n < r) {
-                    sup = "Le nombre à trouver est plus grand.";
+                    sup = "Le nombre à trouver est plus grand que " + n;
                 }
                 if (n == r) {
                     egal = "Vous avez trouvé le nombre !";
@@ -92,7 +105,16 @@ public class Exercice_04_Randomize_Servlet extends HttpServlet {
                         }
                     }
                     meilleurScore = valtemp;
+                    listRandom.clear();
+                    listCoups.clear();
+                    listScore.clear();
+                    listScore.add(meilleurScore);
                 }
+            } else {
+                compteur += listCoups.get(0);
+            }
+            if (!listScore.isEmpty()) {
+                meilleurScore = listScore.get(0);
             }
 
             HttpSession session = request.getSession(true);
